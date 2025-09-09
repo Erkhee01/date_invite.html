@@ -1,0 +1,170 @@
+# date_invite.html
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Болзоонд урих</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Arial", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: radial-gradient(circle at top, #1a2a6c, #b21f1f, #fdbb2d);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      max-width: 500px;
+      animation: fadeIn 1.2s ease-in-out;
+      color: #333;
+      z-index: 2;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #e63946;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+
+    .heart {
+      font-size: 3rem;
+      color: #e63946;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .yes {
+      background: #06d6a0;
+      color: #fff;
+    }
+    .yes:hover {
+      background: #05a383;
+    }
+
+    .no {
+      background: #ef476f;
+      color: #fff;
+      position: relative;
+    }
+
+    .no:hover {
+      top: -50px;
+      left: 50px;
+      position: absolute;
+    }
+
+    /* Нар */
+    .sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -200%);
+      font-size: 5rem;
+      opacity: 0;
+      transition: all 2s ease-in-out;
+      z-index: 1;
+    }
+
+    .sun.show {
+      opacity: 1;
+      transform: translate(-50%, -300px);
+    }
+
+    /* Одон effect */
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.2; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Нар -->
+  <div class="sun">☀️</div>
+
+  <div class="card">
+    <div class="heart">💖</div>
+    <h1>Надтай болзоонд явах уу?</h1>
+    <p>Чи миний хувьд маш онцгой хүн шүү 🤗</p>
+    <button class="yes" onclick="showSun()">Тийм ээ</button>
+    <button class="no">Үгүй</button>
+  </div>
+
+  <!-- Background music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // "Үгүй" товч зугтах
+    const noBtn = document.querySelector(".no");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.floor(Math.random() * 200) - 100;
+      const y = Math.floor(Math.random() * 200) - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Нар гаргах
+    function showSun() {
+      document.querySelector(".sun").classList.add("show");
+      alert("Яаааай! 🎉 Болзоонд уулзъя ❤️");
+    }
+
+    // Од нэмэх
+    function createStar() {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      const size = Math.random() * 3 + 2;
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(star);
+
+      setTimeout(() => star.remove(), 4000);
+    }
+    setInterval(createStar, 200);
+  </script>
+</body>
+</html>
